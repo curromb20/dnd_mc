@@ -1,0 +1,41 @@
+% This simulation has 10.000.000 repetitions.
+% The variable lim can be changed.
+% This is a matlab script
+
+%% MonteCarlo Personajes
+
+dadosRes=matrizSGen(6,3);
+lista=zeros(1,30);
+lista(1)=-5;
+
+for i=2:30
+
+    if mod(i,2)==0
+        lista(i)=lista(i-1)+1;
+    else
+        lista(i)=lista(i-1);
+    end
+
+end
+
+atributos=sum(dadosRes)-min(dadosRes);
+[~,opciones]=size(dadosRes);
+lim=1000000;
+PJ_Suma=zeros(1,lim);
+PJ_atri={};
+mod_acum=zeros(1,lim);
+
+for i=1:lim
+
+    res=randi(opciones,[1 6]);
+    PJ=atributos(res);
+    mod_acum(i)=sum(lista(PJ));
+    PJ_T=sum(PJ);
+    PJ_atri{i}=PJ;
+    PJ_Suma(i)=PJ_T;
+
+end
+
+%% GRAPH
+
+tabulate(mod_acum)
