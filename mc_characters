@@ -36,6 +36,45 @@ for i=1:lim
 
 end
 
-%% GRAPH
+%% Tabulating
 
 tabulate(mod_acum)
+
+
+
+%% Graphing
+% This draws together (with same axis) a boxplot and a barchart 
+
+max_value=24;
+min_value=-24;
+graph_max=max_value+2;
+graph_min=min_value-2;
+
+counts=zeros(1,graph_max);
+v=(min_value:max_value);
+
+for i=1:max_value-min_value+1
+
+v_a=v(i);    
+a=sum(mod_acum==(v_a));
+counts(i)=a;
+
+
+end
+
+centers=v;
+counts=counts/lim;
+
+subplot(2,1,1)
+b=bar(centers,counts,'k')
+ylim([0 0.15])
+b.FaceColor = 'flat';
+b.CData(q1-graph_min-1,:,:) = [0 0 1];
+b.CData(q2-graph_min-1,:,:) = [1 0 0];
+b.CData(q3-graph_min-1,:,:) = [0 0 1];
+
+
+subplot(2,1,2)
+bx=boxplot(mod_acum,'Orientation','horizontal')
+xlim([graph_min graph_max])
+
