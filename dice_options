@@ -1,0 +1,32 @@
+% This small function explores the alternatives from the multiple dice rolling.
+% This is a matlab script.
+
+function [matrizSGen]=matrizSGen(n,dim)
+
+dim=dim+1;
+Posibles=n^dim;
+matrizSGen=zeros(dim,Posibles);
+
+%% Loops
+
+for d=1:dim
+
+    idIni=1;
+    valor=1;
+    lim_d=Posibles/n^(d-1);
+
+    for i=1:lim_d
+
+        idFinal=idIni+(n^(d-1))-1;
+        if valor>n
+            valor=1;
+        end
+
+        matrizSGen(d,idIni:idFinal)=valor;
+        valor=valor+1;
+        idIni=idFinal+1;
+    end
+
+end
+
+end
